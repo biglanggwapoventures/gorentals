@@ -1,0 +1,4 @@
+<?php
+$b = "Adlaon,Agsungot,Apas,Babag,Bacayan,Banilad,Basak Pardo,Basak San Nicolas,Binaliw,Bonbon,Budlaan,Buhisan,Bulacao,Buot-Taop,Busay,Calamba,Cambinocot,Capitol Site,Carreta,Congo Pardo,Congo Ramos,Dayas,Duljo,Fatima,Ermita,Guadalupe,Guba,Hipodromo,Inayawan,Kalubihan,Kalunasan,Kamagayan,Kamputhaw,Kasambagan,Kinasang-an,Labangon,Lahug,Lorega-San Miguel,Lusaran,Luz,Mabini,Mabolo,Malubog,Mambaling,Pahina Central,Pahina San Nicolas,Pamutan,Parian,Paril,Pasil,Pit-os,Poblacion Pardo,Pulangbato,Pung-ol Sibugay,Punta Princesa,Quiot,Sambag 1,Sambag 2,San Antonio,San Jose,San Nicolas Proper,San Roque,Santa Cruz,Santo Niño,Sapangdaku,Sawang Calero,Sinsin,Sirao,Suba,Sudlon 1,Sudlon 2,T.Padilla,Tabunan,Talamban,Tag-bao,Taptap,Tejero,Tinago,Tisa,Toong,Zapatera";
+$b = explode(",", $b);
+return array('brgys'=>$b);
