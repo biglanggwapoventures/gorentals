@@ -13,7 +13,7 @@ function initialize() {
         radius: parseInt($('[name=search_radius]').val())
     });;
     //default localtion
-    var cebuCity = new google.maps.LatLng(10.31552939472010, 123.88557580947874), // Main Map Latitude and Longitude
+    var cebuCity = new google.maps.LatLng(10.3541, 123.9116), // Main Map Latitude and Longitude
     markers,
     myMapOptions = {zoom: 5, center: cebuCity, mapTypeId: google.maps.MapTypeId.ROADMAP };
     // map = new google.maps.Map(document.getElementById("map"), myMapOptions);
@@ -24,8 +24,8 @@ function initialize() {
 
 
  // Try HTML5 geolocation.
- if (navigator.geolocation) {
-   navigator.geolocation.getCurrentPosition(function(position) {
+//  if (navigator.geolocation) {
+//    navigator.geolocation.getCurrentPosition(function(position) {
        var pos = {};
     if($("[name=search_lat]").val() && $('[name=search_lng]').val()){
       
@@ -33,8 +33,11 @@ function initialize() {
          pos.lng =  parseFloat($("[name=search_lng]").val())
      
     }else{
-         pos.lat = position.coords.latitude,
-        pos.lng =  position.coords.longitude
+
+        //  pos.lat = position.coords.latitude,
+        // pos.lng =  position.coords.longitude
+        pos.lat = 10.3541;
+        pos.lng =  123.9116;
     }
     
      infoWindow.setPosition(pos);
@@ -97,7 +100,7 @@ function initialize() {
 
 
         
-    }); 
+    // }); 
 
      if(resultItems.length){
         $('.results-section').html('');
