@@ -100,7 +100,7 @@ function initialize() {
 
 
         
-    // }); 
+    }); 
 
      if(resultItems.length){
         $('.results-section').html('');
@@ -171,13 +171,13 @@ function initialize() {
 
     //here the call to initMarkers() is made with the necessary data for each marker.  All markers are then returned as an array into the markers variable
     markers = initMarkers(map, _markers);
-   }, function() {
-     handleLocationError(true, infoWindow, map.getCenter());
-   });
- } else {
-   // Browser doesn't support Geolocation
-   handleLocationError(false, infoWindow, map.getCenter());
- }
+//    }, function() {
+//      handleLocationError(true, infoWindow, map.getCenter());
+//    });
+//  } else {
+//    // Browser doesn't support Geolocation
+//    handleLocationError(false, infoWindow, map.getCenter());
+//  }
 
     // display zoom control start
     var zoomControlDiv = document.createElement('div');
