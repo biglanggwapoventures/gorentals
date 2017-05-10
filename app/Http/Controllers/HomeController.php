@@ -185,15 +185,11 @@ class HomeController extends Controller
         }
         $favorites = array();
         if($request->has('fav')) {
-            $tfavorites = DB::table('favorites')->where('user',Auth::user()->id)->get();
-            $strs = '';
-            foreach($tfavorites as $fav) {
-                $strs .= (string) $fav->unit . ',';
-            }
-            $favorites = explode(',', $strs);
+            $tfavorites = DB::table('favorites')->select('unit')->where('user',Auth::id())->get()->pluck('unit');
             $byFav = true;
          //   dd($favorites);
-            $f_units = $units->approved()->with('property')->paginate(2000);
+            $f_units = $units->approved()->whereIn('id', $tfavorites)->with('property')->orderBy('id', 'DESC')->limit(3)->get();
+            // dd($f_units);
         }else{
             $byFav = false;
             $f_units = $units->approved()->with('property')->paginate(15);

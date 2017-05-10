@@ -51,14 +51,14 @@ class UnitController extends Controller
     	if(Auth::check() && $request->has('unit')) {
             // check 3 limit favortes
             $favs = DB::table('favorites')->where('user', Auth::user()->id)->get(); 
-            if(count($favs) >= 3) {
-                Session::flash('message', "You only allowed 3 limits for favorites");
-                return redirect('/units/'.$request->input('unit').'/view');
-            } 
-            else {
+            // if(count($favs) >= 3) {
+            //     Session::flash('message', "You only allowed 3 limits for favorites");
+            //     return redirect('/units/'.$request->input('unit').'/view');
+            // } 
+            // else {
                 DB::table('favorites')->insert(['user'=>Auth::user()->id, 'unit'=>$request->input('unit')]);
                 return redirect('/units/'.$request->input('unit').'/view');
-            }
+            // }
     		
     	}
     	return redirect('/');

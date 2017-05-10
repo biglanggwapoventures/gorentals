@@ -180,64 +180,6 @@
                         <div class="row">
                         @foreach($row AS $unit)
                             @if ($unit->user->isEnable())
-                            @if ($byFav) 
-                                @if(in_array((string)$unit->id, $favorites))
-                                    <div class="col-md-4 rental-feed">
-                                        <div class="panel panel-default unit-item " data-lat="{{ $unit->property->latitude }}" data-lng="{{ $unit->property->longitude }}" data-address="{{ $unit->property->address }}">
-                                        <div class="panel-image tile" style="background-image:url(@if(isset($unit->property->photos['primary'])) {{ asset("storage/{$unit->property->photos['primary'][0]}") }}@endif);background-size: cover;background-repeat: no-repeat;background-position: center;">
-                                            <img style="display:none;" class="img-responsive img-hover" src="@if(isset($unit->property->photos['primary'])) {{ asset("storage/{$unit->property->photos['primary'][0]}") }}@endif" alt="">
-                                            <div class="img_hov_eff">
-                                                <a class="btn btn-default btn_trans" href="{{ route('view-unit', ['unit' => $unit->id]) }}"> More Details </a>
-                                            </div>
-                                            <div class="sal_labl">
-                                                Vacant
-                                            </div>
-                                        </div>
-
-                                        <div class="rental-home-feed panel-body">
-                                            <div class="prop_feat">
-                                                <p class="area"><i class="fa fa-home"></i> {{  $unit->property->getTypeDescription() }}</p>
-                                                <p class="bedrom"><i class="fa fa-bed"></i> {{ $unit->bedrooms }} Bed(s)</p>
-                                                <p class="bedrom"><i class="fa fa-bath"></i> {{ $unit->bathrooms }} Bath(s)</p>
-                                            </div>
-                                            <h3 class="sec_titl">{{ $unit->property->building_name }} <a href="/removefavorite?unit={{$unit->id}}" class="btn btn-primary pull-right" style="color:#fff">Remove</a></h3>
-
-                                            <p class="sec_desc">
-                                                @if($unit->property->extension) {{$unit->property->extension}} - @endif {{ $unit->property->address }} 
-                                                <br>
-                                                <span class="nearby-the-property">Landmark: {{ $unit->property->landmarks }} </span>
-                                                <table class="table table-condensed">
-                                                    <tr>
-                                                        <td>Rental Term</td>
-                                                        <td class="text-right"><strong>{{ $unit->rental_terms === 'LONG' ? 'Long Term' :  'Short Term' }}</strong></td>
-                                                        @if($unit->rental_terms === 'LONG')
-                                                            <tr>
-                                                                <td>Rate</td>
-                                                                <td class="text-right"><strong>Php {{ number_format($unit->long_term_rate, 2) }}</strong></td>
-                                                            </tr>
-                                                        @else
-
-                                                            <tr>
-                                                                <td>Daily Rate</td>
-                                                                <td class="text-right"><strong>Php {{ number_format($unit->short_term_daily_rate, 2) }}</strong></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Weekly Rate</td>
-                                                                <td class="text-right"><strong>Php {{ number_format($unit->short_term_weekly_rate, 2) }}</strong></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Monthly Rate</td>
-                                                                <td class="text-right"><strong>Php {{ number_format($unit->short_term_monthly_rate, 2) }}</strong></td>
-                                                            </tr>
-                                                        @endif
-                                                    </tr>
-                                                </table>
-                                            </p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            @else
                                 @if($unit->isAvailable())
                                 <div class="col-md-4 rental-feed hidden">
                                     <div class="panel panel-default unit-item result" data-lat="{{ $unit->property->latitude }}" data-lng="{{ $unit->property->longitude }}" data-address="{{ $unit->property->address }}">
@@ -295,7 +237,7 @@
                                 </div>
                                 @endif
                             @endif
-                            @endif
+                   
                         
                         @endforeach
                         </div>
@@ -309,8 +251,8 @@
                 </div>
 
             </div>
-            @if(count($units) > 0)
-            {{ $units->render() }}
+            @if(count($units) > 0 && !$byFav)
+                {{ $units->render() }}
             @endif
             <!-- /.row -->
         </div>
