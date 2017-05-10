@@ -252,7 +252,7 @@
 
             </div>
             @if(count($units) > 0 && !$byFav)
-                {{ $units->render() }}
+                <!--{{ $units->render() }}-->
             @endif
             <!-- /.row -->
         </div>
