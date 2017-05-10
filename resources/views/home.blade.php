@@ -400,12 +400,17 @@
 @push('scripts')
     <!-- GMaps JavaScript -->
 <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyC1MUjOwwLeP2Jv5Q8o0nt5RH-oSKY5RUw"></script> -->
-<script src="http://maps.google.com/maps/api/js?libraries=places&region=uk&language=en&sensor=false"></script>
-    <script src="{{ asset('js/infobox.js') }}"></script>
-    <script src="{{ asset('js/markerwithlabel_packed.js') }}"></script>
-    <script src="{{ asset('js/custom_map.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+<script src="{{ asset('js/custom_map.js') }}"></script>
+<script src="{{ asset('js/infobox.js') }}"></script>
+<script src="{{ asset('js/markerwithlabel_packed.js') }}"></script>
+    
+<script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCueneuLIZWACMGBDBQaYix4vE9X1UkP_0&callback=initialize&region=ph&libraries=geometry">
+    </script>
+    
+    
     <script>
         $( function() {
     $( "#slider" ).slider({

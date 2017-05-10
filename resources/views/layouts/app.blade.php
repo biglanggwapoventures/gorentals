@@ -45,7 +45,7 @@
 
 </head>
 
-<body onload="initialize()">
+<body>
 
 <!-- Top Bar -->
 <section class="top_sec">
