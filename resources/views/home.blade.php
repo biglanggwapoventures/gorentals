@@ -217,7 +217,7 @@
                                             <p class="bedrom"><i class="fa fa-bed"></i> {{ $unit->bedrooms }} Bed(s)</p>
                                             <p class="bedrom"><i class="fa fa-bath"></i> {{ $unit->bathrooms }} Bath(s)</p>
                                         </div>
-                                        <h3 class="sec_titl">{{ $unit->property->building_name }}</h3>
+                                        <h3 class="sec_titl">{{ $unit->property->building_name }} <br><small><i class="fa fa-clock-o fa-fw"></i> {{ date_create($unit->created_at)->format('F d, Y h:i @ A') }}</small></h3>
 
                                         <p class="sec_desc">
                                             @if($unit->property->extension) {{$unit->property->extension}} - @endif {{ $unit->property->address }}
