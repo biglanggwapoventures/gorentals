@@ -201,7 +201,7 @@ class HomeController extends Controller
             // dd($f_units);
         }else{
             $byFav = false;
-            $f_units = $units->approved()->with('property')->paginate(15);
+            $f_units = $units->approved()->with('property')->get();
         }
        
 
