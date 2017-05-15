@@ -134,8 +134,8 @@
                                     <label>Sort by price</label>
                                     <select name="price_sort" class="form-control" >
                                         <option></option>
-                                        <option value="desc" { request()->price_sort === 'desc' ? 'selected' : '' }}>Lowest to highest</option>
-                                        <option value="asc" { request()->price_sort === 'asc' ? 'selected' : '' }}>Higest to lowest</option>
+                                        <option value="desc" {{ request()->price_sort === 'desc' ? 'selected' : '' }}>Lowest to highest</option>
+                                        <option value="asc" {{ request()->price_sort === 'asc' ? 'selected' : '' }}>Higest to lowest</option>
                                     </select>
                                 </div>
                                 <div class="controls col-md-3 ">
