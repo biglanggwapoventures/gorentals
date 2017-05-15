@@ -18,7 +18,7 @@ class NotificationsController extends Controller
          $appointments = [];
         if(Auth::check()) {
             if(Auth::user()->login_type == 'USER') {
-                $appointments = DB::table('appointments')->where('user_id', Auth::user()->id)->where('status', '!=', 'PENDING')->orderBy('status', 'DESC')->get();
+                $appointments = DB::table('appointments')->where('user_id', Auth::user()->id)->where('status', '!=', 'PENDING')->get();
                 foreach($appointments as $key => $appointment) {
                     $unit = Unit::find($appointment->unit_id);
                     if($unit) {
@@ -29,7 +29,7 @@ class NotificationsController extends Controller
                 }
                 Auth::user()->clearAppointmentNotification();
             } else {
-                $properties = DB::table('properties')->where('created_by', Auth::user()->id)->get();
+                $properties = DB::table('properties')->where('created_by', Auth::user()->id)->orderBy('status', 'DESC')->get();
                 $units = array();
                 foreach($properties as $property) {
                     $tmp_units = DB::table('units')->where('property_id', $property->id)->get();
