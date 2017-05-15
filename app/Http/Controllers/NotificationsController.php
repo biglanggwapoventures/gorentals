@@ -18,7 +18,7 @@ class NotificationsController extends Controller
          $appointments = [];
         if(Auth::check()) {
             if(Auth::user()->login_type == 'USER') {
-                $appointments = DB::table('appointments')->where('user_id', Auth::user()->id)->where('status', '!=', 'PENDING')->get();
+                $appointments = DB::table('appointments')->where('user_id', Auth::user()->id)->where('status', '!=', 'PENDING')->orderBy('status', 'DESC')->get();
                 foreach($appointments as $key => $appointment) {
                     $unit = Unit::find($appointment->unit_id);
                     if($unit) {

@@ -200,6 +200,7 @@ class UserController extends Controller
         
         return redirect('/');
     }
+    
     public function changepassword(Request $request) {
         if(!Auth::check()) { return redirect('/'); }
         $messages = [];
