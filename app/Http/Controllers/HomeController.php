@@ -189,7 +189,7 @@ class HomeController extends Controller
         }
 
         if(in_array($priceSort = $request->input('price_sort'), ['asc', 'desc'])){
-            $units->orderBy(DB::raw("CASE WHEN rental_terms = 'LONG' THEN long_term_rate ELSE short_term_weekly_rate END", $priceSort));
+            $units->orderBy(DB::raw("CASE WHEN rental_terms = 'LONG' THEN long_term_rate ELSE short_term_monthly_rate END"), $priceSort);
         }
 
         $favorites = array();

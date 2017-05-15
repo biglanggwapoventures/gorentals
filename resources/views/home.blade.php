@@ -106,7 +106,7 @@
                                 <div class="controls col-md-3">
                                     <label>Terms </label>
                                     @php
-                                        $types = ['LONG' => 'Long Term (6 monhts or more)', 'SHORT' => 'Short Term (A few nights or weeks)']
+                                        $types = ['LONG' => 'Long Term (6 months or more)', 'SHORT' => 'Short Term (A few nights or weeks)']
                                     @endphp
                                     <select name="terms" class="form-control" >
                                         <option></option>
@@ -135,7 +135,7 @@
                                     <select name="price_sort" class="form-control" >
                                         <option></option>
                                         <option value="asc" {{ request()->price_sort === 'asc' ? 'selected' : '' }}>Lowest to highest</option>
-                                        <option value="desc" {{ request()->price_sort === 'desc' ? 'selected' : '' }}>Higest to lowest</option>
+                                        <option value="desc" {{ request()->price_sort === 'desc' ? 'selected' : '' }}>Highest to lowest</option>
                                     </select>
                                 </div>
                                 <div class="controls col-md-3 ">
