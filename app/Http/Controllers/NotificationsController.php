@@ -29,7 +29,7 @@ class NotificationsController extends Controller
                 }
                 Auth::user()->clearAppointmentNotification();
             } else {
-                $properties = DB::table('properties')->where('created_by', Auth::user()->id)->orderBy('status', 'DESC')->get();
+                $properties = DB::table('properties')->where('created_by', Auth::user()->id)->get();
                 $units = array();
                 foreach($properties as $property) {
                     $tmp_units = DB::table('units')->where('property_id', $property->id)->get();
@@ -40,7 +40,7 @@ class NotificationsController extends Controller
 
                 $appointments = array();
                 foreach($units as $unit) {
-                    $t_appointments = DB::table('appointments')->where('unit_id', $unit->id)->get();
+                    $t_appointments = DB::table('appointments')->where('unit_id', $unit->id)->orderBy('status', 'DESC')->get();
                     foreach($t_appointments as $appointment) {
                         $appointments[] = $appointment;
                     }
