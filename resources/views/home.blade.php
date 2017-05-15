@@ -55,30 +55,16 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div class="controls col-md-3">
-                                    <label>Furnishing </label>
-                                    <select name="furnishing"class="form-control">
-                                        <option></option>
-                                        @foreach($furnishing AS $val => $label)
-                                            <option value="{{ $val }}" {{request()->furnishing == $val ? 'selected' : ''}}>{{ $label }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label>Min. Price </label>
+                                    <input name="min_price" type="text" class="form-control" value="{{ request()->min_price }}">
+                                </div>
+                                <div class="controls col-md-3">
+                                    <label>Max. Price </label>
+                                    <input name="max_price" type="text" class="form-control" value="{{ request()->max_price }}">
                                 </div>
 
-                                <div class="controls col-md-3">
-                                    <label>Terms </label>
-                                    @php
-                                        $types = ['LONG' => 'Long Term (6 monhts or more)', 'SHORT' => 'Short Term (A few nights or weeks)']
-                                    @endphp
-                                    <select name="terms" class="form-control" >
-                                        <option></option>
-                                        @foreach($types AS $val => $label)
-                                            <option value="{{ $val }}" {{request()->terms == $val ? 'selected' : ''}}>{{ $label }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
+                                
                                 <div class="clearfix"></div>
                             </div>
 
@@ -108,13 +94,29 @@
                                     </select>
                                 </div>
                                 <div class="controls col-md-3">
-                                    <label>Min. Price </label>
-                                    <input name="min_price" type="text" class="form-control" value="{{ request()->min_price }}">
+                                    <label>Furnishing </label>
+                                    <select name="furnishing"class="form-control">
+                                        <option></option>
+                                        @foreach($furnishing AS $val => $label)
+                                            <option value="{{ $val }}" {{request()->furnishing == $val ? 'selected' : ''}}>{{ $label }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                                 <div class="controls col-md-3">
-                                    <label>Max. Price </label>
-                                    <input name="max_price" type="text" class="form-control" value="{{ request()->max_price }}">
+                                    <label>Terms </label>
+                                    @php
+                                        $types = ['LONG' => 'Long Term (6 monhts or more)', 'SHORT' => 'Short Term (A few nights or weeks)']
+                                    @endphp
+                                    <select name="terms" class="form-control" >
+                                        <option></option>
+                                        @foreach($types AS $val => $label)
+                                            <option value="{{ $val }}" {{request()->terms == $val ? 'selected' : ''}}>{{ $label }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+                                
                                  <div class="controls col-md-3 first">
                                     <label>Capacity <i>(for dormitory only)</i></label>
                                     <input name="capacity" type="text" class="form-control" value="{{ request()->capacity }}">
@@ -126,6 +128,22 @@
                                         <option value="MALE">MALE</option>
                                         <option value="FEMALE">FEMALE</option>
                                         <option value="BOTH">BOTH</option>
+                                    </select>
+                                </div>
+                                <div class="controls col-md-3 ">
+                                    <label>Sort by price</label>
+                                    <select name="price_sort" class="form-control" >
+                                        <option></option>
+                                        <option value="desc" { request()->price_sort === 'desc' ? 'selected' : '' }}>Lowest to highest</option>
+                                        <option value="asc" { request()->price_sort === 'asc' ? 'selected' : '' }}>Higest to lowest</option>
+                                    </select>
+                                </div>
+                                <div class="controls col-md-3 ">
+                                    <label>Sort by post time</label>
+                                    <select name="post_time" class="form-control" >
+                                        <option></option>
+                                        <option value="desc" {{ request()->post_time === 'desc' ? 'selected' : '' }}>Most Recent</option>
+                                        <option value="asc" {{ request()->post_time === 'asc' ? 'selected' : '' }}>Oldest</option>
                                     </select>
                                 </div>
                                 <div class="clearfix"></div>

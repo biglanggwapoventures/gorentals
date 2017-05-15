@@ -95,6 +95,11 @@
                                         <td class="text-right"><strong>{{ $unit->inclusions }}</strong></td>
                                         
                                     </tr>
+                                    <tr>
+                                        <td>Policy</td>
+                                        <td class="text-right"><strong>{{ $unit->property->policy }}</strong></td>
+                                        
+                                    </tr>
                                 </table>
 
                                 <div class="row">

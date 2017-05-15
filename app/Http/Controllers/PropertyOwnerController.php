@@ -100,7 +100,8 @@ class PropertyOwnerController extends Controller
             'building_name',
             'permit_number',
             'property_type',
-            'landmarks'
+            'landmarks',
+            'policy'
         ]);
 
         if($request->has('extension')) {
@@ -181,7 +182,8 @@ class PropertyOwnerController extends Controller
             'building_name',
             'permit_number',
             'property_type',
-            'landmarks'
+            'landmarks',
+            'policy'
         ]);
 
         if($request->has('building_name')) {

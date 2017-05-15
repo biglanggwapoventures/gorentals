@@ -132,7 +132,7 @@ class UserController extends Controller
             ->count('id');
 
         if($conflicts > 0){
-            return response()->json(['result' => false, 'message' => 'Your selected schedule is in conflict with other unit appointments.']);
+            return response()->json(['result' => false, 'message' => 'Your selected schedule is in conflict with other users.']);
         }
 
         Appointment::create([
@@ -155,9 +155,11 @@ class UserController extends Controller
            } else {
                 $appointment->status = 'DECLINE';
            }
+           $appointment->remarks = request()->remarks;
            $appointment->save();
         }
-        return redirect('/appointments');
+        // return redirect('/appointments');
+        return redirect(url('/notifications?tab=appointments'));
     }
 
     

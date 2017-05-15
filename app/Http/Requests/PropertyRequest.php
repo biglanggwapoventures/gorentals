@@ -29,6 +29,7 @@ class PropertyRequest extends FormRequest
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'building_name' => 'required',
+            'policy' => 'required',
             'permit_number' => 'required',
             'property_type' => 'required|in:APARTMENT,BOARDING_HOUSE,DORMITORY',
             'photos.primary.0' => 'required|image|max:2048',

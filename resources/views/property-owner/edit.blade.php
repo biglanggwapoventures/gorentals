@@ -97,6 +97,12 @@
                                             <input type="text" class="form-control" name="capacity" id="capacities" value="{{$property->capacity}}">
                                         </div>             
                                     </div>
+                                    <div class="row">
+                                        <div class="controls col-md-12">
+                                            <label>Policy</label>
+                                            <textarea rows="3" name="policy" class="form-control">{{$property->policy}}</textarea>
+                                        </div>   
+                                    </div>
                                     <div class="row"></div>
                                         <div class="clearfix"></div>
                                     </div>

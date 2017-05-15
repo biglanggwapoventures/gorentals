@@ -21,7 +21,7 @@ Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@update');
 Route::get('/profile/edit', 'UserController@edit');
 Route::get('/appointments', 'UserController@appointments');
-Route::get('/appointments/{id}/{flag}', 'UserController@updateAppointment');
+Route::post('/appointments/{id}/{flag}', 'UserController@updateAppointment');
 
 
 Route::post('/appointments/units/{id}', 'UserController@setAppointment');

@@ -46,6 +46,8 @@
 </head>
 
 <body>
+    
+</body>
 
 <!-- Top Bar -->
 <section class="top_sec">
@@ -164,15 +166,15 @@
                         </li>
                     @else
                         <li>
-                            <a class="" href="{{ url('appointments')}}">
+                            <a href="{{ url('/notifications') }}"> 
                                 @php
-                                    $appointmentCount = Auth::user()->getAppointmentsCount();
+                                    $notificationCount += Auth::user()->getAppointmentsCount();
                                 @endphp
-                                @if($appointmentCount)
-                                    <span class="badge">{{ $appointmentCount }}</span>
+                                @if($notificationCount)
+                                    <span class="badge">{{ $notificationCount }}</span>
                                 @endif
-                                
-                            My Appointments</a>
+                                Notifications
+                            </a>
                         </li>
                         @if(Auth::user()->login_type === 'PROPERTY_OWNER')
                             <li>
@@ -193,17 +195,12 @@
                         @endif
                         <li>
                             <a class="" href="#"><i class="fa fa-user"></i>
-                                @if($notificationCount)
-                                    <span class="badge">{{ $notificationCount }}</span>
-                                @endif
+                                
                                 {{ Auth::user()->displayName() }} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="/profile"> Profile </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/notifications') }}"> Notifications </a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"> Logout </a>

@@ -15,6 +15,7 @@ class Property extends Model
         'property_type',
         'gender',
         'capacity',
+        'policy',
         'photos',
         'created_by',
         'extension'
