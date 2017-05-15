@@ -39,18 +39,27 @@ class NotificationsController extends Controller
                 }
 
                 $appointments = array();
+                
                 foreach($units as $unit) {
                     $t_appointments = DB::table('appointments')->where('unit_id', $unit->id)->orderBy('status', 'DESC')->get();
                     foreach($t_appointments as $appointment) {
                         $appointments[] = $appointment;
                     }
                 }
+            
+                
+
+                usort($appointments, function ($a, $b)
+                {
+                    return strcmp($b->status, $a->status);
+                });
+
                 foreach($appointments as $key => $value) {
                     $appointments[$key]->user = User::find($value->user_id);
                     $sUnit = Unit::find($value->unit_id);
                     $appointments[$key]->unit = $sUnit;
                     $appointments[$key]->property = Property::find($sUnit->property_id);
-                    $appointments[$key]->address= $sUnit ->property->address;
+                    $appointments[$key]->address= $sUnit->property->address;
                 }
              //  dd($appointments);
             }
