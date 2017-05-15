@@ -21,10 +21,10 @@ Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@update');
 Route::get('/profile/edit', 'UserController@edit');
 Route::get('/appointments', 'UserController@appointments');
-Route::post('/appointments/{id}/{flag}', 'UserController@updateAppointment');
+Route::patch('/appointment/{id}/{flag}', 'UserController@updateAppointment')->name('appointment.update');
 
 
-Route::post('/appointments/units/{id}', 'UserController@setAppointment');
+Route::post('/appointments/units/{id}', 'UserController@setAppointment')->name('appointment.set');
 
 
 //Route::get('/appointments/{id}/delete', 'UserController@deleteAppointment');

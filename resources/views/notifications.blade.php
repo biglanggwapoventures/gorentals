@@ -143,6 +143,7 @@
                                     <div class="status">
                                         <form class="update-appointment" method="post">
                                         {!! csrf_field() !!}
+                                        {!! method_field('PATCH') !!}
                                         @if($appointment->status == 'ACCEPT')
                                             <p>Status: <span>APPROVED</span></p>
                                         @elseif($appointment->status == 'DECLINE')
@@ -155,12 +156,12 @@
                                             <textarea name="remarks"  rows="3" class="form-control">{{ $appointment->remarks }}</textarea>
                                        </div>
                                         @if($appointment->status == 'ACCEPT')
-                                            <button type="submit" data-url="/appointments/{{$appointment->id}}/-1" class="btn btn-primary btn-sm submit">DECLINE</button>
+                                            <button type="submit" data-url="{{ route('appointment.update', ['id' => $appointment->id, 'flag' => -1]) }}" class="btn btn-primary btn-sm submit">DECLINE</button>
                                         @elseif($appointment->status == 'DECLINE')
-                                            <button type="submit" data-url="/appointments/{{$appointment->id}}/1" class="btn btn-primary btn-sm submit">ACCEPT</button>
+                                            <button type="submit" data-url="{{ route('appointment.update', ['id' => $appointment->id, 'flag' => 1]) }}" class="btn btn-primary btn-sm submit">ACCEPT</button>
                                         @else
-                                            <button type="submit" data-url="/appointments/{{$appointment->id}}/1" class="btn btn-primary btn-sm submit">ACCEPT</button>
-                                            <button type="submit" data-url="/appointments/{{$appointment->id}}/-1" class="btn btn-primary btn-sm submit" >DECLINE</button>
+                                            <button type="submit" data-url="{{ route('appointment.update', ['id' => $appointment->id, 'flag' => 1]) }}" class="btn btn-primary btn-sm submit">ACCEPT</button>
+                                            <button type="submit" data-url="{{ route('appointment.update', ['id' => $appointment->id, 'flag' => -1]) }}" class="btn btn-primary btn-sm submit" >DECLINE</button>
                                         @endif
                                         </form>
                                     </div>
@@ -187,10 +188,12 @@
     <script type="text/javascript">
     
         $(document).ready(function(){
-            @if(empty(request()->tab))
+           
             var objDiv = document.getElementById("message-box");
-            objDiv.scrollTop = objDiv.scrollHeight;
-            @endif
+            if(objDiv){
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
+            
 
             $('.submit').click(function (e){
                 e.preventDefault();

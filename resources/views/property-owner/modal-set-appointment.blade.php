@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body" style="text-align: center">
-            	<form method="POST" action="/appointments/units/{{$unit->id}}" id="set-app">
+            	<form method="POST" action="{{ route('appointment.set', ['id' => $unit->id]) }}" id="set-app">
             	{{ csrf_field() }}
 				<div class="bs-callout bs-callout-danger hidden error">
 				</div>
