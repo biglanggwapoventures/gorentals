@@ -90,15 +90,16 @@
                                                 <td class="text-right"><strong>Php {{ number_format($unit->short_term_monthly_rate, 2) }}</strong></td>
                                             </tr>
                                         @endif
-                                        <tr>
-                                        <td>Inclusions</td>
-                                        <td class="text-right"><strong>{{ $unit->inclusions }}</strong></td>
-                                        
-                                    </tr>
                                     <tr>
                                         <td>Policy</td>
                                         <td class="text-right"><strong><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#policy-modal"><i class="fa fa-check"></i> View Policy</a></strong></td>
                                     </tr>
+                                    <tr>
+                                        <td>Inclusions</td>
+                                        <td class="text-right"><strong>{{ $unit->inclusions }}</strong></td>
+                                        
+                                    </tr>
+                                    
                                 </table>
 
                                 <div class="row">
