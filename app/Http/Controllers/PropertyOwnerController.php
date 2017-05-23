@@ -11,6 +11,7 @@ use Auth;
 use App\User;
 use App\Appointment;
 use DB;
+use App\PropertyPolicy AS Policy; 
 class PropertyOwnerController extends Controller
 {
     public function showProfile()
@@ -22,8 +23,13 @@ class PropertyOwnerController extends Controller
 
         $property = Property::find($id);
         if(Auth::check() && Auth::user()->id == $property->created_by) {
-           // dd($property->toArray());
-            return view('property-owner.edit', ['property'=>$property, 'genders' => ['MALE', 'FEMALE', 'BOTH']]);
+           $propertyPolicies = $property->policyIds();
+            return view('property-owner.edit', [
+                'property'=> $property, 
+                'genders' => ['MALE', 'FEMALE', 'BOTH'],
+                'policies' => Policy::all(),
+                'propertyPolicies' => $propertyPolicies
+            ]);
         }
 
         return redirect('/');
@@ -31,7 +37,10 @@ class PropertyOwnerController extends Controller
 
     public function createProperty()
     {
-        return view('property-owner.create-property', [ 'genders' => ['MALE', 'FEMALE', 'BOTH']]);
+        return view('property-owner.create-property', [
+            'genders' => ['MALE', 'FEMALE', 'BOTH'],
+            'policies' => Policy::all()
+        ]);
     }
 
     public function createUnit(Property $property)
@@ -137,6 +146,7 @@ class PropertyOwnerController extends Controller
 
         
         $property->save();
+        $property->policies()->sync($request->policies);
 
         return redirect('properties');
     }
@@ -227,6 +237,8 @@ class PropertyOwnerController extends Controller
 
             $property->photos = $uploaded;
             $property->update();
+
+            $property->policies()->sync($request->policies);
 
             return response()->json([
                 'result' => true

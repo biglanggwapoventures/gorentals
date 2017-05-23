@@ -97,8 +97,7 @@
                                     </tr>
                                     <tr>
                                         <td>Policy</td>
-                                        <td class="text-right"><strong>{{ $unit->property->policy }}</strong></td>
-                                        
+                                        <td class="text-right"><strong><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#policy-modal"><i class="fa fa-check"></i> View Policy</a></strong></td>
                                     </tr>
                                 </table>
 
@@ -263,6 +262,32 @@
         </div>
     </div>
     @include('property-owner.modal-set-appointment')
+    <div class="modal fade" id="policy-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Policies</h4>
+            </div>
+            <div class="modal-body">
+                @foreach($unit->property->policies AS $policy)
+                    <div style="margin-bottom:10px;">
+                        <p style="border-bottom: 1px dashed #ddd;"><strong>{{ $policy->name }}</strong></p>
+                        <span class="text-info">{{ $policy->description }}</span>
+                    </div>
+                @endforeach
+                <div style="margin-bottom:10px;">
+                    <p style="border-bottom: 1px dashed #ddd;"><strong>Others:</strong></p>
+                    <span class="text-info">{{ $unit->property->policy }}</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     @if(Auth::check() && Auth::user()->login_type === 'ADMIN')
     <div id="approve-unit" class="modal fade" style="z-index:10000">
         <div class="modal-dialog modal-sm">

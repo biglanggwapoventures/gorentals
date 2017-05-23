@@ -881,12 +881,19 @@ InfoBox.prototype.close = function () {
 
       var _markers = [];
        var resultItems = [],
-            suggestions = [];
+            suggestions = [],
+            distanceSort = $('#banner').data('distance');
 
     $('.unit-item').each(function(){
         var result = $(this).hasClass('result'),
             data = $(this).data(),  
             ltLng = new google.maps.LatLng(data.lat, data.lng);
+
+        var distance = getDistanceFromLatLonInKm(pos.lat, pos.lng, data.lat, data.lng);
+
+        $(this).find('.distance').removeClass('hidden').text('('+distance.toFixed(2)+' km away from you)');
+        $(this).attr('data-distance', distance);
+      
 
         var marker = {
             loc: data.address, 
@@ -896,6 +903,7 @@ InfoBox.prototype.close = function () {
             propNearby: $(this).find('.nearby-the-property').text(),
             propLink: $(this).find('.img_hov_eff a').attr('href'),
             markLabl: 'images/apartment.png',
+            distance: distance.toFixed(2)
         };
 
 
@@ -919,13 +927,16 @@ InfoBox.prototype.close = function () {
              }
         }
 
-       
-
 
         
     }); 
 
      if(resultItems.length){
+       if(distanceSort){
+         resultItems =  _.orderBy(resultItems, function(item) {
+            return item.data('distance');
+          }, [distanceSort]);
+       }
         $('.results-section').html('');
         var chunks = _.chunk(resultItems, 3);
         var html = '<div class="row">';
@@ -1068,8 +1079,6 @@ InfoBox.prototype.close = function () {
         });   
      }
 
-     
-
 
      function moveMarker(placeName, latlng){
         marker.setIcon(image);
@@ -1192,7 +1201,7 @@ InfoBox.prototype.close = function () {
             newMarkers.push(marker);
             //define the text and style for all infoboxes
             boxText.style.cssText = "";
-            boxText.innerHTML = '<div class="col-xs-12 p0" style="width:350px"><div class="panel panel-default"><div class="panel-image" style="overflow:hidden"><img class="img-responsive img-hover" src="' + markerData[i].propImg + '" alt=""></div><div class="panel-body"><h3 class="sec_titl"><a href="'+ markerData[i].propLink +'">' + markerData[i].propTitle + '</a> </h3><div class=""><p class="sec_titl"> ' + markerData[i].propNearby + '</p></div></div></div></div>';
+            boxText.innerHTML = '<div class="col-xs-12 p0" style="width:350px"><div class="panel panel-default"><div class="panel-image" style="overflow:hidden"><img class="img-responsive img-hover" src="' + markerData[i].propImg + '" alt=""></div><div class="panel-body"><h3 class="sec_titl"><a href="'+ markerData[i].propLink +'">' + markerData[i].propTitle + '</a> </h3><div class=""><p class="sec_titl"> ' + markerData[i].propNearby + '</p><p>'+markerData[i].distance+' km away from you</p></div></div></div></div>';
             //Define the infobox
             newMarkers[i].infobox = new InfoBox(infoboxOptions);
             //Open box when page is loaded
@@ -1218,3 +1227,22 @@ InfoBox.prototype.close = function () {
    
 }
 // initialize();
+
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}

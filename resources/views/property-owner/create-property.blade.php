@@ -129,12 +129,26 @@
                                             <input type="text" class="form-control" name="capacity" id="capacities">
                                         </div>             
                                     </div>
+                                    <hr>
                                     <div class="row">
                                         <div class="controls col-md-12">
-                                            <label>Policy</label>
-                                            <textarea rows="3" name="policy" class="form-control"></textarea>
+                                            <h4>Policies <small> *Choose at least 1</small></h4>
+                                           
+                                            @foreach($policies AS $policy)
+                                                <div class="checkbox" style="border-bottom: 1px dashed #ddd;padding-bottom: 10px">
+                                                    <label>
+                                                        <input type="checkbox" name="policies[]" value="{{ $policy->id }}">
+                                                        <p ><strong>{{ $policy->name }}</strong></p>
+                                                        <span class="text-info">{{ $policy->description }}</span>
+                                                </label></div>
+                                            @endforeach
                                         </div>   
+                                         <div class="form-group">
+                                            <label>Custom Policy</label>
+                                            <textarea name="policy" rows="3" class="form-control" placeholder="Write your custom policy here"></textarea>
+                                        </div>  
                                     </div>
+                                    <hr>
                                     <div class="row"></div>
                                     <div class="row" style="margin-top:20px">
                                         <div class="col-sm-4">

@@ -97,12 +97,25 @@
                                             <input type="text" class="form-control" name="capacity" id="capacities" value="{{$property->capacity}}">
                                         </div>             
                                     </div>
+                                   <hr>
                                     <div class="row">
                                         <div class="controls col-md-12">
-                                            <label>Policy</label>
-                                            <textarea rows="3" name="policy" class="form-control">{{$property->policy}}</textarea>
+                                            <h4>Policies <small> *Choose at least 1</small></h4>
+                                            @foreach($policies AS $policy)
+                                                <div class="checkbox" style="border-bottom: 1px dashed #ddd;padding-bottom: 10px">
+                                                    <label>
+                                                        <input type="checkbox" name="policies[]" class="policies" value="{{ $policy->id }}"  {{ in_array($policy->id, $propertyPolicies) ? 'checked="checked"' : '' }}>
+                                                        <p ><strong>{{ $policy->name }}</strong></p>
+                                                        <span class="text-info">{{ $policy->description }}</span>
+                                                </label></div>
+                                            @endforeach
+                                            <div class="form-group">
+                                                <label>Custom Policy</label>
+                                                <textarea name="policy" rows="3" class="form-control" placeholder="Write your custom policy here">{{$property->policy}}</textarea>
+                                            </div>   
                                         </div>   
                                     </div>
+                                    <hr>
                                     <div class="row"></div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -223,6 +236,13 @@
 
     <!-- Script to Activate the Carousel -->
     <script>
+
+        $('form').submit(function (e){
+            if($(this).find('.policies:checked').length < 1){
+                alert('Please select at least 1 policy');
+                e.preventDefault();
+            }
+        })
 
         $('#property_type').change(function() {
            if($('#property_type').val() != 'DORMITORY') {

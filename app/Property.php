@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Property extends Model
 {
@@ -49,5 +50,20 @@ class Property extends Model
     public function owner()
     {
         return $this->belongsTo('App\User', 'created_by');
+    }
+
+    public function policies()
+    {
+        return $this->belongsToMany('App\PropertyPolicy', 'property_policy', 'property_id', 'policy_id')->withTimestamps();
+    }
+    
+    public function policyIds()
+    {
+        return DB::table('property_policy')
+            ->select('policy_id')
+            ->wherePropertyId($this->id)
+            ->get()
+            ->pluck('policy_id')
+            ->toArray();
     }
 }

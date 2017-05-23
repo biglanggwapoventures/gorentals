@@ -7,7 +7,7 @@
        <div class="alert alert-info">{{ Session::get('success') }}</div>
     @endif
     
-    <header id="banner" class="stat_bann" @if($byFav) style="display: none" @endif>
+    <header id="banner" class="stat_bann" @if($byFav) style="display: none" @endif  data-distance="{{ request()->distance_sort }}">
         <div class="bannr_sec2">
             <div id="map"></div>
             <div class="clearfix"></div>
@@ -148,7 +148,17 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-
+                            <div class="control-group form-group">
+                                <div class="controls col-md-3 first">
+                                    <label>Sort by distance</label>
+                                    <select name="distance_sort" class="form-control" >
+                                        <option></option>
+                                        <option value="asc" {{ request()->distance_sort === 'asc' ? 'selected' : '' }}>Nearest to farthest</option>
+                                        <option value="desc" {{ request()->distance_sort === 'desc' ? 'selected' : '' }}>Farthest to nearest</option>
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                             <div class="control-group form-group">
                                 @foreach(array_chunk($amenities, (int)count($amenities)/3) AS $col)
                                 <div class="col-sm-3">
@@ -217,14 +227,17 @@
                                             <p class="bedrom"><i class="fa fa-bed"></i> {{ $unit->bedrooms }} Bed(s)</p>
                                             <p class="bedrom"><i class="fa fa-bath"></i> {{ $unit->bathrooms }} Bath(s)</p>
                                         </div>
-                                        <h3 class="sec_titl">{{ $unit->property->building_name }} <br><small><i class="fa fa-clock-o fa-fw"></i> {{ date_create($unit->created_at)->format('F d, Y h:i @ A') }}</small></h3>
+                                        <h3 class="sec_titl">{{ $unit->property->building_name }} 
+                                           <br> <small><i class="fa fa-clock-o fa-fw"></i> {{ date_create($unit->created_at)->format('F d, Y h:i @ A') }}</small>
+                                        </h3>
 
                                         <p class="sec_desc">
-                                            @if($unit->property->extension) {{$unit->property->extension}} - @endif {{ $unit->property->address }}
+                                            @if($unit->property->extension) {{$unit->property->extension}} - @endif {{ $unit->property->address }} <span class=" text-danger distance hidden"></span>
                                             <br>
                                             <span class="nearby-the-property"> Landmark: {{ $unit->property->landmarks }} </span>
                                             <table class="table table-condensed">
                                                 <tr>
+                                                    
                                                     <td>Rental Term</td>
                                                     <td class="text-right"><strong>{{ $unit->rental_terms === 'LONG' ? 'Long Term' :  'Short Term' }}</strong></td>
                                                     @if($unit->rental_terms === 'LONG')
@@ -312,10 +325,11 @@
                                         <h3 class="sec_titl">{{ $unit->property->building_name }}</h3>
 
                                         <p class="sec_desc">
-                                            {{ $unit->property->address }}
+                                            {{ $unit->property->address }} <span class="distance hidden"></span>
                                             <br>
                                             <span class="nearby-the-property"> Landmark: {{ $unit->property->landmarks }} </span>
                                             <table class="table table-condensed">
+                                                
                                                 <tr>
                                                     <td>Rental Term</td>
                                                     <td class="text-right"><strong>{{ $unit->rental_terms === 'LONG' ? 'Long Term' :  'Short Term' }}</strong></td>
